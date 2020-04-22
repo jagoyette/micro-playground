@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace PatientService
 {
@@ -25,6 +26,15 @@ namespace PatientService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure data service
+            services.Configure<Models.PatientDatabaseSettings>(
+                Configuration.GetSection(nameof(Models.PatientDatabaseSettings)));
+
+            services.AddSingleton<Models.IPatientDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<Models.PatientDatabaseSettings>>().Value);
+            
+            services.AddSingleton<Services.PatientDataService>();
+            
             services.AddControllers();
         }
 

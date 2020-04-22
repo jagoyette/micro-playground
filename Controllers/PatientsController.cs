@@ -1,37 +1,31 @@
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
 namespace PatientService.Controllers
 {
+    using Models;
+    using Services;
+
     [Route("api/patients")]
     [ApiController]
     public class PatientsController : ControllerBase
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Models.Patient>>> GetPatients()
-        {
-            var patients = new List<Models.Patient>
-            {
-                new Models.Patient
-                {
-                    Uuid = "gew",
-                    LastName = "G",
-                    FirstName = "F",
-                    PatientId = "GF-231"
-                }
-            };
+        private readonly PatientDataService _patientService;
 
-            return Ok(patients);
-            
-            // return await Task<IEnumerable<Models.Patient>>.Delay(100).ContinueWith(t =>
-            // {
-            //     return patients;
-            // });
+        public PatientsController(PatientDataService patientService)
+        {
+            this._patientService = patientService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Patient>>> GetPatients()
+        {
+            return await _patientService.Get();
         }
 
         [HttpPost]
-        public async Task<ActionResult> CreatePatient(Models.PatientInfo patientInfo)
+        public async Task<ActionResult> CreatePatient(PatientInfo patientInfo)
         {
             var patient = new Models.Patient
             {
@@ -41,7 +35,7 @@ namespace PatientService.Controllers
             };
             patient.Uuid = System.Guid.NewGuid().ToString();
 
-            return Ok(patient);
+            return Ok(await _patientService.Create(patient));
         }
     }
 }
