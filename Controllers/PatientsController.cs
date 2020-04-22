@@ -27,15 +27,8 @@ namespace PatientService.Controllers
         [HttpPost]
         public async Task<ActionResult> CreatePatient(PatientInfo patientInfo)
         {
-            var patient = new Models.Patient
-            {
-                Uuid = _patientService.CreatePatientUuid(),
-                FirstName = patientInfo.FirstName,
-                LastName = patientInfo.LastName,
-                PatientId = patientInfo.PatientId
-            };
 
-            return Ok(await _patientService.Create(patient));
+            return Ok(await _patientService.Create(patientInfo));
         }
     }
 }

@@ -17,31 +17,34 @@ namespace PatientService.Services
             _patients = database.GetCollection<Patient>(settings.PatientCollectionName);
         }
 
-        public string CreatePatientUuid()
-        {
-            return MongoDB.Bson.ObjectId.GenerateNewId().ToString();
-        }
-
         public async Task<List<Patient>> Get() =>
             (await _patients.FindAsync(p => true)).ToList();
 
-        public async Task<Patient> Get(string id) =>
-            (await _patients.FindAsync<Patient>(patient => patient.Uuid == id)).FirstOrDefault();
+        public async Task<Patient> Get(string uuid) =>
+            (await _patients.FindAsync<Patient>(patient => patient.Uuid == uuid)).FirstOrDefault();
 
-        public async Task<Patient> Create(Patient patient)
+        public async Task<Patient> Create(PatientInfo patientInfo)
         {
+            // Create a Patient model from the PatientInfo
+            var patient = new Models.Patient
+            {
+                Uuid =  MongoDB.Bson.ObjectId.GenerateNewId().ToString(),
+                FirstName = patientInfo.FirstName,
+                LastName = patientInfo.LastName,
+                PatientId = patientInfo.PatientId
+            };
+
             await _patients.InsertOneAsync(patient);
             return patient;
         }
 
-        public async void Update(string id, Patient patientIn) =>
-            await _patients.ReplaceOneAsync(patient => patient.Uuid == id, patientIn);
+        public async void Update(string uuid, Patient patientIn) =>
+            await _patients.ReplaceOneAsync(patient => patient.Uuid == uuid, patientIn);
 
         public async void Remove(Patient patientIn) =>
             await _patients.DeleteOneAsync(patient => patient.Uuid == patientIn.Uuid);
 
-        public async void Remove(string id) =>
-            await _patients.DeleteOneAsync(patient => patient.Uuid == id);
-
+        public async void Remove(string uuid) =>
+            await _patients.DeleteOneAsync(patient => patient.Uuid == uuid);
     }
 }
