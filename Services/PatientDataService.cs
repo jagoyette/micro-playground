@@ -17,6 +17,11 @@ namespace PatientService.Services
             _patients = database.GetCollection<Patient>(settings.PatientCollectionName);
         }
 
+        public string CreatePatientUuid()
+        {
+            return MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+        }
+
         public async Task<List<Patient>> Get() =>
             (await _patients.FindAsync(p => true)).ToList();
 

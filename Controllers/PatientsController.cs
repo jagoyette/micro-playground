@@ -29,7 +29,7 @@ namespace PatientService.Controllers
         {
             var patient = new Models.Patient
             {
-                Uuid = MongoDB.Bson.ObjectId.GenerateNewId().ToString(),
+                Uuid = _patientService.CreatePatientUuid(),
                 FirstName = patientInfo.FirstName,
                 LastName = patientInfo.LastName,
                 PatientId = patientInfo.PatientId
