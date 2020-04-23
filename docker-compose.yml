@@ -10,11 +10,22 @@ services:
       - 9443:443
       - 9080:80
 
+  mediaservice:
+    image: mediaservice
+    build:
+      context: ./MediaService
+      dockerfile: Dockerfile
+    volumes:
+      - ./media:/app/media
+    ports:
+      - 10443:443
+      - 10080:80
+
   mongo:
     image: mongo
     restart: always
     volumes:
-      - mongo_data:/data
+      - mongo_data:/data   # Volume mapping is not working on Windows for Mongo
     ports:
       - 27017:27017
  
@@ -28,5 +39,5 @@ services:
 
 volumes:
   mongo_data:
-    external: true
-    
+    external: true        # Create a volume using `docker volume create`
+                          # Use `docker-compose stop` to let volume persist
