@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace MediaService
 {
@@ -25,6 +26,13 @@ namespace MediaService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure data service
+            services.Configure<Models.MediaDatabaseSettings>(
+                Configuration.GetSection(nameof(Models.MediaDatabaseSettings)));
+
+            services.AddSingleton<Models.IDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<Models.MediaDatabaseSettings>>().Value);
+
             services.AddControllers();
         }
 
