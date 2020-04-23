@@ -33,6 +33,8 @@ namespace MediaService
             services.AddSingleton<Models.IDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<Models.MediaDatabaseSettings>>().Value);
 
+            services.AddSingleton<Services.MediaDataService>();
+
             services.AddControllers();
         }
 
