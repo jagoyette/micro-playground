@@ -48,6 +48,8 @@ namespace PatientService
 
             app.UseHttpsRedirection();
 
+            app.UseCors();            
+
             app.UseRouting();
 
             app.UseAuthorization();
