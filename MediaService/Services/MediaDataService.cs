@@ -44,6 +44,8 @@ namespace MediaService.Services
             }
         }
 
+        public string MediaStoreRootPath => _mediaStoreRootPath;
+        
         public async Task<List<Media>> GetMediaForPatient(string patientUuid)
         {
             _logger.LogDebug($"Retrieving media for patient {patientUuid}");

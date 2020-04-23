@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,11 +17,13 @@ namespace MediaService.Controllers
     {
         private readonly ILogger _logger;
         private readonly MediaDataService _mediaDataService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
         
-        public MediaController(ILogger<MediaController> logger, MediaDataService mediaDataService)
+        public MediaController(ILogger<MediaController> logger, MediaDataService mediaDataService, IWebHostEnvironment webHostEnvironment)
         {
             _logger = logger;
             _mediaDataService = mediaDataService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpGet]
@@ -26,7 +31,15 @@ namespace MediaService.Controllers
         {
             _logger.LogInformation($"API GetMediaForPatient - Getting all media for patient {patientUuid}");
 
-            return await _mediaDataService.GetMediaForPatient(patientUuid);
+            var medias = await _mediaDataService.GetMediaForPatient(patientUuid);
+            
+            // Insert host info for Urls
+            var scheme = this.Request.Scheme;
+            var host = this.Request.Host.Host;
+            var port = this.Request.Host.Port ?? (scheme == "https" ? 443 : 80);
+
+            medias.ForEach(m => m.MediaUrl = new UriBuilder(scheme, host, port, m.MediaUrl).ToString());
+            return medias;
         }
 
         [HttpPost]

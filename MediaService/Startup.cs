@@ -1,9 +1,11 @@
+using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.FileProviders;
 
 namespace MediaService
 {
@@ -47,6 +50,22 @@ namespace MediaService
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors();
+
+            // Serve media files
+            var mediaDataService = app.ApplicationServices?.GetService<Services.MediaDataService>();
+            if (mediaDataService != null)
+            {
+                var relativePath = mediaDataService.MediaStoreRootPath;
+                var fullPath = Path.GetFullPath(relativePath);
+                app.UseStaticFiles(new StaticFileOptions()
+                {
+                    FileProvider = new PhysicalFileProvider(fullPath),
+                    RequestPath = new PathString("/media")
+                });
+            }
+
 
             app.UseRouting();
 
