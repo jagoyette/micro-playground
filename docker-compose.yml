@@ -4,11 +4,11 @@ services:
   patientservice:
     image: patientservice
     build:
-      context: .
+      context: ./PatientService
       dockerfile: Dockerfile
     ports:
-      - 443:443
-      - 80:80
+      - 9443:443
+      - 9080:80
 
   mongo:
     image: mongo
