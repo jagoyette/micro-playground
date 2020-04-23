@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "MediaService"
+		},
+		{
+			"path": "docker"
 		}
 	]
 }
