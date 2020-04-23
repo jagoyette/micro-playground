@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using MediaService.Models;
-using System.Linq;
 
 namespace MediaService.Services
 {
@@ -26,7 +26,10 @@ namespace MediaService.Services
             _mediaCollection = database.GetCollection<Media>(settings.CollectionName);
             _mediaStoreRootPath = settings.MediaStoreRootPath;
 
+            // Make sure media path is accessible
+            if (!string.IsNullOrEmpty(_mediaStoreRootPath))
             {
+                _logger.LogInformation($"Verifying access to MediaStoreRootPath: {_mediaStoreRootPath}");
                 // Check media store path
                 var path = _mediaStoreRootPath;
                 if (Directory.Exists(path))
@@ -41,23 +44,42 @@ namespace MediaService.Services
             }
         }
 
-        public async Task<List<Media>> Get()
+        public async Task<List<Media>> GetMediaForPatient(string patientUuid)
         {
-//            (await _mediaCollection.FindAsync(p => true)).ToList();
+            _logger.LogDebug($"Retrieving media for patient {patientUuid}");
 
-            var files = Directory.GetFiles(_mediaStoreRootPath);
-            return await Task.FromResult(files.Select(f => new Media
-            {
-                Filename = f,
-            }).ToList());
-
+            var media = await _mediaCollection.FindAsync<Media>(m => m.PatientUuid == patientUuid);
+            return media.ToList();
         }
 
-        public async Task<Media> Get(string uuid) =>
+        public async Task<Media> GetMediaItem(string uuid) =>
             (await _mediaCollection.FindAsync<Media>(m => m.Uuid == uuid)).FirstOrDefault();
 
-        public async Task<Media> Create(Media media)
+        public async Task<Media> CreateMediaForPatient(MediaInfo mediaInfo, Stream fileStream)
         {
+            _logger.LogDebug($"Creating new media item");
+
+            // start with an ObjectId for this media item
+            var mediaUuid = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
+
+            // save the file to our media store
+            var mediaPath = Path.Combine(_mediaStoreRootPath, mediaUuid + "-" + mediaInfo.Filename);
+            using (var stream = new FileStream(mediaPath, FileMode.Create))
+            {
+                fileStream.CopyTo(stream);
+            }
+
+            _logger.LogDebug($"Media item saved to {mediaPath}");
+
+            var media = new Media
+            {
+                Uuid =  mediaUuid,
+                PatientUuid = mediaInfo.PatientUuid,
+                Filename = mediaInfo.Filename,
+                Filetype = mediaInfo.Filetype,
+                MediaUrl = mediaPath
+            };
+
             await _mediaCollection.InsertOneAsync(media);
             return media;
         }

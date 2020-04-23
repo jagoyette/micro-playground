@@ -24,11 +24,27 @@ namespace MediaService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Media>>> GetMediaForPatient(string patientUuid)
         {
-            _logger.LogInformation($"getting all media for patient {patientUuid}");
+            _logger.LogInformation($"API GetMediaForPatient - Getting all media for patient {patientUuid}");
 
-            var mediaFiles = await _mediaDataService.Get();
+            return await _mediaDataService.GetMediaForPatient(patientUuid);
+        }
 
-            return Ok(mediaFiles);
+        [HttpPost]
+        public async Task<ActionResult<Media>> CreateMediaForPatient([FromForm] MediaFormData mediaFormData)
+        {
+            var patientUuid = mediaFormData.PatientUuid;
+            var fileInfo = mediaFormData.FileInfo;
+
+            _logger.LogInformation($"API CreateMediaForPatient - Creating for patient {patientUuid}");
+
+            var mediaInfo = new MediaInfo
+            {
+                PatientUuid = patientUuid,
+                Filename = mediaFormData.Filename,
+                Filetype = mediaFormData.Filetype
+            };
+
+            return await _mediaDataService.CreateMediaForPatient(mediaInfo, fileInfo.OpenReadStream());
         }
     }
 }
