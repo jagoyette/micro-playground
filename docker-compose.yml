@@ -14,7 +14,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - ./data:/data
+      - mongo_data:/data
     ports:
       - 27017:27017
  
@@ -26,4 +26,7 @@ services:
     ports:
       - 8081:8081
 
+volumes:
+  mongo_data:
+    external: true
     
