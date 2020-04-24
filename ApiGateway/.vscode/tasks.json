@@ -21,6 +21,7 @@
         {
             "type": "docker-build",
             "label": "docker-build: debug",
+            "group": "build",
             "dependsOn": [
                 "build"
             ],
@@ -38,6 +39,7 @@
         {
             "type": "docker-build",
             "label": "docker-build: release",
+            "group": "build",
             "dependsOn": [
                 "build"
             ],
