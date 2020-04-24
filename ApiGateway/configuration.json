@@ -3,33 +3,33 @@
         {
             "UpstreamPathTemplate": "/api/v1/patients",
             "DownstreamPathTemplate": "/api/patients",
-            "DownstreamScheme": "https",
+            "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "patientservice",
-                    "Port": 9443
+                    "Port": 80
                 }
             ]
         },
         {
             "UpstreamPathTemplate": "/api/v1/media",
             "DownstreamPathTemplate": "/api/media",
-            "DownstreamScheme": "https",
+            "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "mediaservice",
-                    "Port": 10443
+                    "Port": 80
                 }
             ]
         },
         {
             "UpstreamPathTemplate": "/api/v1/media{everything}",
             "DownstreamPathTemplate": "/api/media{everything}",
-            "DownstreamScheme": "https",
+            "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
                     "Host": "mediaservice",
-                    "Port": 10443
+                    "Port": 80
                 }
             ]
         }
