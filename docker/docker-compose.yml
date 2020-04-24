@@ -4,7 +4,7 @@ services:
   patientservice:
     image: patientservice
     build:
-      context: ./PatientService
+      context: ../PatientService
       dockerfile: Dockerfile
     ports:
       - 9443:443
@@ -13,7 +13,7 @@ services:
   mediaservice:
     image: mediaservice
     build:
-      context: ./MediaService
+      context: ../MediaService
       dockerfile: Dockerfile
     volumes:
       - ./media:/app/media
