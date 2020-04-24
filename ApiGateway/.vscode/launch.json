@@ -1,6 +1,5 @@
 {
     "configurations": [
-
         {
             "name": ".NET Core Launch",
             "type": "coreclr",
@@ -12,7 +11,7 @@
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
-            },
+            }
         },
         {
             "name": "Launch Docker .NET Core",
@@ -22,7 +21,7 @@
             "netCore": {
                 "appProject": "${workspaceFolder}/ApiGateway.csproj"
             }
-        },       
+        },
         {
             "name": "Attach Docker .NET Core",
             "type": "docker",
@@ -30,6 +29,6 @@
             "netCore": {
                 "appProject": "${workspaceFolder}/ApiGateway.csproj"
             }
-        }        
+        }
     ]
 }

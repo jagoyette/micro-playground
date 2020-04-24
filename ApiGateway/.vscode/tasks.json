@@ -21,7 +21,6 @@
         {
             "type": "docker-build",
             "label": "docker-build: debug",
-            "group": "build",
             "dependsOn": [
                 "build"
             ],
@@ -39,12 +38,11 @@
         {
             "type": "docker-build",
             "label": "docker-build: release",
-            "group": "build",
             "dependsOn": [
                 "build"
             ],
             "dockerBuild": {
-                "tag": "patientservice:latest",
+                "tag": "apigateway:latest",
                 "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
@@ -61,7 +59,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/PatientService.csproj",
+                "appProject": "${workspaceFolder}/ApiGateway.csproj",
                 "enableDebugging": true
             }
         },
@@ -73,7 +71,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/PatientService.csproj"
+                "appProject": "${workspaceFolder}/ApiGateway.csproj"
             }
         }
     ]
