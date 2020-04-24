@@ -1,4 +1,38 @@
 {
-    "ReRoutes": [],
+    "ReRoutes": [
+        {
+            "UpstreamPathTemplate": "/api/v1/patients",
+            "DownstreamPathTemplate": "/api/patients",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "patientservice",
+                    "Port": 9443
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/api/v1/media",
+            "DownstreamPathTemplate": "/api/media",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "mediaservice",
+                    "Port": 10443
+                }
+            ]
+        },
+        {
+            "UpstreamPathTemplate": "/api/v1/media{everything}",
+            "DownstreamPathTemplate": "/api/media{everything}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "mediaservice",
+                    "Port": 10443
+                }
+            ]
+        }
+    ],
     "GlobalConfiguration": {}
 }

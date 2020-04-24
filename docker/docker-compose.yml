@@ -1,6 +1,15 @@
 version: '3.4'
 
 services:
+  apigateway:
+    image: apigateway
+    build:
+      context: ../ApiGateway
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+      
   patientservice:
     image: patientservice
     build:
