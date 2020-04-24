@@ -1,13 +1,20 @@
 {
 	"folders": [
 		{
+			"name": "docker",
+			"path": "docker"
+		},
+		{
+			"name": "ApiGateway",
+			"path": "ApiGateway"
+		},
+		{
+			"name": "PatientService",
 			"path": "PatientService"
 		},
 		{
+			"name": "MediaService",
 			"path": "MediaService"
-		},
-		{
-			"path": "docker"
 		}
 	]
 }

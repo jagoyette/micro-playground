@@ -1,0 +1,35 @@
+{
+    "configurations": [
+
+        {
+            "name": ".NET Core Launch",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/bin/Debug/netcoreapp3.1/apigateway.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+        },
+        {
+            "name": "Launch Docker .NET Core",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/ApiGateway.csproj"
+            }
+        },       
+        {
+            "name": "Attach Docker .NET Core",
+            "type": "docker",
+            "request": "attach",
+            "netCore": {
+                "appProject": "${workspaceFolder}/ApiGateway.csproj"
+            }
+        }        
+    ]
+}
