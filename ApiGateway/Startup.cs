@@ -27,6 +27,7 @@ namespace ApiGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddOcelot(_configuration);
         }
 
@@ -37,6 +38,10 @@ namespace ApiGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            app.UseRouting();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
