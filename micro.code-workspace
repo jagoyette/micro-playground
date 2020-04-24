@@ -15,6 +15,9 @@
 		{
 			"name": "MediaService",
 			"path": "MediaService"
+		},
+		{
+			"path": "client-web-app"
 		}
 	]
 }
