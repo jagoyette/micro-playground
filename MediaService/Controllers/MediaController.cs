@@ -1,3 +1,4 @@
+using System.Net.Cache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -32,13 +33,6 @@ namespace MediaService.Controllers
             _logger.LogInformation($"API GetMediaForPatient - Getting all media for patient {patientUuid}");
 
             var medias = await _mediaDataService.GetMediaForPatient(patientUuid);
-            
-            // Insert host info for Urls
-            var scheme = this.Request.Scheme;
-            var host = this.Request.Host.Host;
-            var port = this.Request.Host.Port ?? (scheme == "https" ? 443 : 80);
-
-            medias.ForEach(m => m.MediaUrl = new UriBuilder(scheme, host, port, m.MediaUrl).ToString());
             return medias;
         }
 

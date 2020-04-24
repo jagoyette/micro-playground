@@ -13,18 +13,21 @@ namespace MediaService.Services
         private readonly ILogger _logger;
         private readonly IMongoCollection<Media> _mediaCollection;
         private string _mediaStoreRootPath;
+        private string _mediaStoreRootUrl;
 
         public MediaDataService(ILogger<MediaDataService> logger, IDatabaseSettings settings)
         {
             _logger = logger;
             _logger.LogInformation($"Creating Media Data service with Connection: {settings.ConnectionString}");
             _logger.LogInformation($"MediaStoreRootPath: {settings.MediaStoreRootPath}");
+            _logger.LogInformation($"MediaStoreRootUrl: {settings.MediaStoreRootUrl}");
 
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
             _mediaCollection = database.GetCollection<Media>(settings.CollectionName);
             _mediaStoreRootPath = settings.MediaStoreRootPath;
+            _mediaStoreRootUrl = settings.MediaStoreRootUrl;
 
             // Make sure media path is accessible
             if (!string.IsNullOrEmpty(_mediaStoreRootPath))
@@ -45,6 +48,8 @@ namespace MediaService.Services
         }
 
         public string MediaStoreRootPath => _mediaStoreRootPath;
+
+        public string MediaStoreRootUrl => _mediaStoreRootUrl;
         
         public async Task<List<Media>> GetMediaForPatient(string patientUuid)
         {
@@ -79,7 +84,7 @@ namespace MediaService.Services
                 PatientUuid = mediaInfo.PatientUuid,
                 Filename = mediaInfo.Filename,
                 Filetype = mediaInfo.Filetype,
-                MediaUrl = mediaPath
+                MediaUrl = mediaPath.Replace(_mediaStoreRootPath, _mediaStoreRootUrl)
             };
 
             await _mediaCollection.InsertOneAsync(media);

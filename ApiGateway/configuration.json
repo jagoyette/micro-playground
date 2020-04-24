@@ -32,6 +32,17 @@
                     "Port": 80
                 }
             ]
+        },
+        {
+            "UpstreamPathTemplate": "/media/{everything}",
+            "DownstreamPathTemplate": "/media/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "mediaservice",
+                    "Port": 80
+                }
+            ]
         }
     ],
     "GlobalConfiguration": {}

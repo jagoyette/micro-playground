@@ -49,20 +49,19 @@ namespace MediaService
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseCors();
 
             // Serve media files
             var mediaDataService = app.ApplicationServices?.GetService<Services.MediaDataService>();
             if (mediaDataService != null)
             {
+                var requestPath = mediaDataService.MediaStoreRootUrl;
                 var relativePath = mediaDataService.MediaStoreRootPath;
                 var fullPath = Path.GetFullPath(relativePath);
                 app.UseStaticFiles(new StaticFileOptions()
                 {
                     FileProvider = new PhysicalFileProvider(fullPath),
-                    RequestPath = new PathString("/media")
+                    RequestPath = new PathString(requestPath)
                 });
             }
 

@@ -46,8 +46,6 @@ namespace PatientService
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseCors();            
 
             app.UseRouting();
