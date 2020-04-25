@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,7 @@ import { MediaComponent } from './components/media/media.component';
     BrowserAnimationsModule,
     MatSliderModule, MatCardModule, MatButtonModule,
     MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatDividerModule
+    MatDividerModule, MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
