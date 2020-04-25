@@ -1,0 +1,9 @@
+<div>
+    <div>Patients</div>
+    <ul>
+      <li *ngFor="let patient of patients">
+          {{ patient.lastName }}, {{ patient.firstName }}  ({{ patient.patientId }})
+      </li>
+    </ul>
+  
+</div>

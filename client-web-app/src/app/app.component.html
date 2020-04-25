@@ -1,11 +1,16 @@
 <div>
-  <h1 class="mat-display-1">Angular Client Web App</h1>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row><h1>Angular Client Web App</h1></mat-toolbar-row>
+    <mat-divider></mat-divider>
+    <mat-toolbar-row>
+      <div>
+        <button mat-button routerLink="/home">Home</button>
+        <button mat-button routerLink="/patients">Patients</button>
+        <button mat-button routerLink="/media">Media</button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-  <div>Patients</div>
-  <ul>
-    <li *ngFor="let patient of patients">
-        {{ patient.lastName }}, {{ patient.firstName }}  ({{ patient.patientId }})
-    </li>
-  </ul>
+  <router-outlet></router-outlet>
 
 </div>
