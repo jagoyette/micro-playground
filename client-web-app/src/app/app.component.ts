@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MicroServiceService } from './services/micro-service.service';
+
 import { Patient } from './models/patient';
 import { Media } from './models/media';
 import { PatientMediaService } from './services/patient-media.service';
