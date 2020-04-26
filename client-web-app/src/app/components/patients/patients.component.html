@@ -21,8 +21,18 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row class="selectable-row"
+                [ngClass]="{'selected': selectedPatient === row }"
+                (click)="selectPatient(row);"
+                *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
 
     </mat-table>
   
+    <div class="button-container">
+        <button mat-raised-button [routerLink]="['/media', selectedPatient?.uuid]" [disabled]="!selectedPatient">
+            Show Media
+        </button>
+    </div>
+
 </div>

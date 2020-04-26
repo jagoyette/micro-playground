@@ -9,7 +9,7 @@ import { MediaComponent } from './components/media/media.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'patients', component: PatientsComponent },
-  { path: 'media', component: MediaComponent },
+  { path: 'media/:patientUuid', component: MediaComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' }
 ];

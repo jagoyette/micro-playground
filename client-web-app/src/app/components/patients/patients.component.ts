@@ -13,7 +13,8 @@ export class PatientsComponent implements OnInit {
   constructor(private patientMediaService: PatientMediaService) { }
 
   public patients: Patient[];
-  displayedColumns: string[] = ['firstName', 'lastName', 'patientId'];
+  public displayedColumns: string[] = ['firstName', 'lastName', 'patientId'];
+  public selectedPatient: Patient;
 
   ngOnInit(): void {
     console.log('Retrieving patients...');
@@ -23,4 +24,7 @@ export class PatientsComponent implements OnInit {
     });
   }
 
+  selectPatient(row: Patient): void {
+    this.selectedPatient = row;
+  }
 }
