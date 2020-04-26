@@ -12,6 +12,17 @@
             ]
         },
         {
+            "UpstreamPathTemplate": "/api/v1/patients{everything}",
+            "DownstreamPathTemplate": "/api/patients{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "patientservice",
+                    "Port": 80
+                }
+            ]
+        },
+        {
             "UpstreamPathTemplate": "/api/v1/media",
             "DownstreamPathTemplate": "/api/media",
             "DownstreamScheme": "http",
