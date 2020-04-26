@@ -1,1 +1,6 @@
-<p>media works!</p>
+<div>
+    <div [hidden]="patient" class="mat-title">Retrieving patient info...</div>
+    <div [hidden]="!patient" class="mat-title">{{patient?.lastName}}, {{patient?.firstName}} : {{patient?.patientId}}</div>
+
+    <p>You have {{media?.length}} items</p>
+</div>

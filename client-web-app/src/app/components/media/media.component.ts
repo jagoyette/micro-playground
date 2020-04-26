@@ -29,9 +29,19 @@ export class MediaComponent implements OnInit {
   private initializeWithPatientId(patientUuid: string): void {
     console.log('Initializing media for patient ' + patientUuid);
 
+    // clear existing model data
     this.media = null;
     this.patient = null;
 
-  
+    this.patientMediaService.getPatient(patientUuid).subscribe(data => {
+      this.patient = data;
+      console.log('Retrieved patient data.');
+    });
+
+    this.patientMediaService.getMediaForPatent(patientUuid).subscribe(data => {
+      this.media = data;
+      console.log('Retrieved ' + data.length + ' media items');
+    });
+
   }
 }

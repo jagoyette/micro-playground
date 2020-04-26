@@ -19,9 +19,18 @@ export class PatientMediaService {
     return this.http.get<Patient[]>(url);
   }
 
+  getPatient(uuid: string): Observable<Patient> {
+    const url = this.baseUrl + '/patients/' + uuid;
+    return this.http.get<Patient>(url);
+  }
+
   getMediaForPatent(id: string): Observable<Media[]> {
     const url = this.baseUrl + '/media';
     return this.http.get<Media[]>(url, { params: {patientUuid: id} });
   }
 
+  getMediaItem(uuid: string): Observable<Media> {
+    const url = this.baseUrl + '/media/' + uuid;
+    return this.http.get<Media>(url);
+  }
 }
