@@ -1,20 +1,24 @@
-<h1 mat-dialog-title>New Patient</h1>
-<div mat-dialog-content>
-  <p>Enter patient information below</p>
-  <mat-form-field>
-    <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="patientInfo.firstName">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Last Name</mat-label>
-    <input matInput [(ngModel)]="patientInfo.lastName">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Patient ID</mat-label>
-    <input matInput [(ngModel)]="patientInfo.patientId">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button [mat-dialog-close]="patientInfo" cdkFocusInitial>Ok</button>
-</div>
+<h1 mat-dialog-title>Create a New Patient</h1>
+<form #patientForm="ngForm">
+  <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-evenly start">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input cdkFocusInitial required matInput [(ngModel)]="patientInfo.firstName" name="firstName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input required matInput [(ngModel)]="patientInfo.lastName" name="lastName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Patient ID</mat-label>
+      <input required matInput [(ngModel)]="patientInfo.patientId" name="patientId">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button
+            [mat-dialog-close]="patientInfo"
+            [disabled]="patientForm.invalid">Ok</button>
+  </div>
+</form>
+

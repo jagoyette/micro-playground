@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { PatientMediaService } from 'src/app/services/patient-media.service';
 import { Patient } from 'src/app/models/patient';
+import { NewPatientDialogComponent } from '../new-patient-dialog/new-patient-dialog.component';
 
 @Component({
   selector: 'app-patients',
@@ -10,7 +12,8 @@ import { Patient } from 'src/app/models/patient';
 })
 export class PatientsComponent implements OnInit {
 
-  constructor(private patientMediaService: PatientMediaService) { }
+  constructor(private patientMediaService: PatientMediaService,
+              private newPatientDialog: MatDialog) { }
 
   public patients: Patient[];
   public displayedColumns: string[] = ['firstName', 'lastName', 'patientId'];
@@ -26,5 +29,21 @@ export class PatientsComponent implements OnInit {
 
   selectPatient(row: Patient): void {
     this.selectedPatient = row;
+  }
+
+  createNewPatient(): void {
+    const dialogRef = this.newPatientDialog.open(NewPatientDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const patientInfo = result;
+        if (patientInfo.firstName && patientInfo.lastName && patientInfo.patientId) {
+          console.log('Creating new Patient for ' + patientInfo.firstName + ' ' + patientInfo.lastName);
+          this.patientMediaService.createPatient(patientInfo).subscribe(data => {
+            console.log('Success creating new patient Uuid: ' + data.uuid);
+            this.patients.push(data);
+          });
+        }
+     }
+    });
   }
 }

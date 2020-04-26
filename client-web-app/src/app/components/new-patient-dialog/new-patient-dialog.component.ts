@@ -13,7 +13,7 @@ export class NewPatientDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewPatientDialogComponent>) { }
 
-  public patientInfo: PatientInfo;
+  public patientInfo: PatientInfo = new PatientInfo();
 
   ngOnInit(): void {
   }

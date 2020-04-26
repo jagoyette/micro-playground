@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 import { Patient } from '../models/patient';
 import { Media } from '../models/media';
+import { PatientInfo } from '../models/patient-info';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class PatientMediaService {
   getPatient(uuid: string): Observable<Patient> {
     const url = this.baseUrl + '/patients/' + uuid;
     return this.http.get<Patient>(url);
+  }
+
+  createPatient(patientInfo: PatientInfo): Observable<Patient> {
+    const url = this.baseUrl + '/patients';
+    return this.http.post<Patient>(url, patientInfo);
   }
 
   getMediaForPatent(id: string): Observable<Media[]> {
