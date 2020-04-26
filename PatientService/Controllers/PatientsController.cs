@@ -29,6 +29,7 @@ namespace PatientService.Controllers
         }
 
         [HttpGet]
+        [Route("{uuid}")]
         public async Task<ActionResult<Patient>> GetPatient(string uuid)
         {
             _logger.LogDebug("API - GetPatient: Retrieving patients {uuid}");
