@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
-import { Patient } from 'src/app/models/patient';
-import { PatientMediaService } from 'src/app/services/patient-media.service';
+import { PatientInfo } from 'src/app/models/patient-info';
 
 
 @Component({
@@ -12,10 +11,9 @@ import { PatientMediaService } from 'src/app/services/patient-media.service';
 })
 export class NewPatientDialogComponent implements OnInit {
 
-  constructor(public dialogRef: MatDialogRef<NewPatientDialogComponent>,
-              private patientService: PatientMediaService) { }
+  constructor(public dialogRef: MatDialogRef<NewPatientDialogComponent>) { }
 
-  public newPatient: Patient;
+  public patientInfo: PatientInfo;
 
   ngOnInit(): void {
   }

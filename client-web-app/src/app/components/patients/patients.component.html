@@ -1,5 +1,11 @@
 <div>
-    <h3>Available Patients</h3>
+    <h1 class="title">Available Patients
+        <span class="btn-add-patient">
+            <button mat-mini-fab color="accent" aria-label="New Patient">
+                <mat-icon>add</mat-icon>
+            </button>
+        </span>
+    </h1>
 
     <mat-table [dataSource]="patients" class="mat-elevation-z8">
         <!-- First Name Column -->
@@ -28,7 +34,6 @@
         </mat-row>
 
     </mat-table>
-  
     <div class="button-container">
         <button mat-raised-button [routerLink]="['/media', selectedPatient?.uuid]" [disabled]="!selectedPatient">
             Show Media

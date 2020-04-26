@@ -1,12 +1,20 @@
 <h1 mat-dialog-title>New Patient</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Enter patient information below</p>
   <mat-form-field>
     <mat-label>First Name</mat-label>
-    <input matInput [(ngModel)]="data.animal">
+    <input matInput [(ngModel)]="patientInfo.firstName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Last Name</mat-label>
+    <input matInput [(ngModel)]="patientInfo.lastName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Patient ID</mat-label>
+    <input matInput [(ngModel)]="patientInfo.patientId">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button [mat-dialog-close]="patientInfo" cdkFocusInitial>Ok</button>
 </div>
