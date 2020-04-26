@@ -28,6 +28,13 @@ namespace PatientService.Controllers
             return await _patientService.Get();
         }
 
+        [HttpGet]
+        public async Task<ActionResult<Patient>> GetPatient(string uuid)
+        {
+            _logger.LogDebug("API - GetPatient: Retrieving patients {uuid}");
+            return await _patientService.Get(uuid);
+        }
+
         [HttpPost]
         public async Task<ActionResult> CreatePatient(PatientInfo patientInfo)
         {
