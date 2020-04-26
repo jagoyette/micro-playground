@@ -40,7 +40,9 @@ export class PatientsComponent implements OnInit {
           console.log('Creating new Patient for ' + patientInfo.firstName + ' ' + patientInfo.lastName);
           this.patientMediaService.createPatient(patientInfo).subscribe(data => {
             console.log('Success creating new patient Uuid: ' + data.uuid);
-            this.patients.push(data);
+            const newList = this.patients;
+            newList.push(data);
+            this.patients = newList.slice();
           });
         }
      }
