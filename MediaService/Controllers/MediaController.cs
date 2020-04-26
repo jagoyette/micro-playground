@@ -28,12 +28,20 @@ namespace MediaService.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Media>>> GetMediaForPatient(string patientUuid)
+        public async Task<ActionResult<IEnumerable<Media>>> GetMediaForPatient([FromQuery] string patientUuid)
         {
             _logger.LogInformation($"API GetMediaForPatient - Getting all media for patient {patientUuid}");
 
-            var medias = await _mediaDataService.GetMediaForPatient(patientUuid);
-            return medias;
+            return await _mediaDataService.GetMediaForPatient(patientUuid);
+        }
+
+        [HttpGet]
+        [Route("{uuid}")]
+        public async Task<ActionResult<Media>> GetMedia(string uuid)
+        {
+            _logger.LogInformation($"API GetMedia - Getting media with id {uuid}");
+
+            return await _mediaDataService.GetMediaItem(uuid);
         }
 
         [HttpPost]
