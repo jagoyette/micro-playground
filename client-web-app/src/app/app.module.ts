@@ -11,12 +11,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { MediaComponent } from './components/media/media.component';
+import { NewPatientDialogComponent } from './components/new-patient-dialog/new-patient-dialog.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { MediaComponent } from './components/media/media.component';
     AppComponent,
     HomeComponent,
     PatientsComponent,
-    MediaComponent
+    MediaComponent,
+    NewPatientDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,10 @@ import { MediaComponent } from './components/media/media.component';
     FlexLayoutModule,
     MatSliderModule, MatCardModule, MatButtonModule,
     MatMenuModule, MatSidenavModule, MatToolbarModule,
-    MatDividerModule, MatTableModule
+    MatDividerModule, MatTableModule, MatDialogModule
+  ],
+  entryComponents: [
+    NewPatientDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
