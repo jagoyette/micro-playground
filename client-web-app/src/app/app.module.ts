@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -30,6 +31,7 @@ import { MediaComponent } from './components/media/media.component';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     MatSliderModule, MatCardModule, MatButtonModule,
     MatMenuModule, MatSidenavModule, MatToolbarModule,
     MatDividerModule, MatTableModule

@@ -2,5 +2,14 @@
     <div [hidden]="patient" class="mat-title">Retrieving patient info...</div>
     <div [hidden]="!patient" class="mat-title">{{patient?.lastName}}, {{patient?.firstName}} : {{patient?.patientId}}</div>
 
-    <p>You have {{media?.length}} items</p>
+    <div class="container">
+        <div class="flex-container" fxLayout="row wrap" fxLayoutGap="16px">
+            <mat-card class="media-card" *ngFor="let mediaItem of media" fxFlex="20">
+                <img [src]="'http://localhost' + mediaItem.mediaUrl">
+                <mat-card-content>
+                    {{ mediaItem.filename }}
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
 </div>
