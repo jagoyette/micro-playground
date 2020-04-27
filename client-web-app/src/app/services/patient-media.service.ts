@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Patient } from '../models/patient';
@@ -44,7 +44,7 @@ export class PatientMediaService {
     return this.baseUrl + '/media/' + uuid + '/file';
   }
 
-  createMediaItem(patientUuid: string, fileName: string, contentType: string, file: File): Observable<Media> {
+  createMediaItem(patientUuid: string, fileName: string, contentType: string, file: File): Observable<HttpEvent<any>> {
     const url = this.baseUrl + '/media';
 
     // create form data to post
@@ -54,6 +54,6 @@ export class PatientMediaService {
     formData.append('ContentType', contentType);
     formData.append('FileInfo', file, file.name);
 
-    return this.http.post<Media>(url, formData);
+    return this.http.post(url, formData, {reportProgress: true, observe: 'events'});
   }
 }

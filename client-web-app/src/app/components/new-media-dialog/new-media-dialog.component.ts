@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Media } from 'src/app/models/media';
 import { PatientMediaService } from 'src/app/services/patient-media.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-new-media-dialog',
@@ -16,6 +17,7 @@ export class NewMediaDialogComponent implements OnInit {
 
   private patientUuid: string;
   public media: Media;
+  public progress: number;
 
   // Data for dialog
   public fileInfo = {
@@ -46,11 +48,17 @@ export class NewMediaDialogComponent implements OnInit {
   onUpload(): void {
     this.mediaService.createMediaItem(this.patientUuid,
       this.fileInfo.fileName, this.fileInfo.contentType, this.fileInfo.file)
-      .subscribe(data => {
-        this.media = data;
-        console.log('Uploaded new media with uuid: ' + this.media.uuid);
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round(100 * event.loaded / event.total);
+          console.log('Upload progress: ' + this.progress + '%');
+        }
+        else if (event.type === HttpEventType.Response) {
+          this.media = event.body;
+          console.log('Uploaded new media with uuid: ' + this.media.uuid);
 
-        this.dialogRef.close(this.media);
+          this.dialogRef.close(this.media);
+        }
       });
   }
 }
