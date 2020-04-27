@@ -1,3 +1,4 @@
+using System.IO;
 using System.Net.Cache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +61,18 @@ namespace MediaService.Controllers
             };
 
             return await _mediaDataService.CreateMediaForPatient(mediaInfo, fileInfo.OpenReadStream());
+        }
+
+        [HttpGet]
+        [Route("{uuid}/file")]
+        public async Task<ActionResult> GetMediaFile(string uuid)
+        {
+            _logger.LogInformation($"API GetMediaFile - Getting media file with id {uuid}");
+
+            var mediaStream = await _mediaDataService.GetMediaStream(uuid);
+
+            return File(mediaStream, "image/png");
+
         }
     }
 }

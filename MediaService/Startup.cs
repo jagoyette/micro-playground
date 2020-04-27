@@ -51,21 +51,6 @@ namespace MediaService
 
             app.UseCors();
 
-            // Serve media files
-            var mediaDataService = app.ApplicationServices?.GetService<Services.MediaDataService>();
-            if (mediaDataService != null)
-            {
-                var requestPath = mediaDataService.MediaStoreRootUrl;
-                var relativePath = mediaDataService.MediaStoreRootPath;
-                var fullPath = Path.GetFullPath(relativePath);
-                app.UseStaticFiles(new StaticFileOptions()
-                {
-                    FileProvider = new PhysicalFileProvider(fullPath),
-                    RequestPath = new PathString(requestPath)
-                });
-            }
-
-
             app.UseRouting();
 
             app.UseAuthorization();

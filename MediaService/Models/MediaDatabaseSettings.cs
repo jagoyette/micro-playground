@@ -7,7 +7,6 @@ namespace MediaService.Models
         string ConnectionString { get; set; }
         string DatabaseName { get; set; }
         string MediaStoreRootPath { get; set; }
-        string MediaStoreRootUrl { get; set; }
     }
     
     public class MediaDatabaseSettings : IDatabaseSettings
@@ -16,7 +15,6 @@ namespace MediaService.Models
         public string ConnectionString { get; set; }
         public string DatabaseName { get; set; }
         public string MediaStoreRootPath { get; set; }
-        public string MediaStoreRootUrl { get; set; }
     }
 
 }
