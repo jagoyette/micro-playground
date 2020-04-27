@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
 import { Patient } from '../models/patient';
 import { Media } from '../models/media';
 import { PatientInfo } from '../models/patient-info';
@@ -11,9 +12,12 @@ import { PatientInfo } from '../models/patient-info';
 })
 export class PatientMediaService {
 
-  private readonly baseUrl = 'http://localhost/api/v1';
+  // Get base url from environment
+  private readonly baseUrl = environment.apiBaseUrl || '/api/v1';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    console.log('PatientMediaService created with base url: ' + this.baseUrl)
+  }
 
   getAllPatents(): Observable<Patient[]> {
     const url = this.baseUrl + '/patients';
