@@ -10,9 +10,9 @@
 
     <div class="container">
         <div class="flex-container" fxLayout="row wrap" fxLayoutGap="16px">
-            <mat-card class="media-card" *ngFor="let mediaItem of media" fxFlex="20">
+            <mat-card class="media-card" *ngFor="let mediaItem of media" fxFlex="15%">
                 <img [src]="getMediaUrl(mediaItem)">
-                <mat-card-content>
+                <mat-card-content class="media-card-content">
                     {{ mediaItem.fileName }}
                 </mat-card-content>
             </mat-card>
