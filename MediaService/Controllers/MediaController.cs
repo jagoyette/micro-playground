@@ -69,9 +69,10 @@ namespace MediaService.Controllers
         {
             _logger.LogInformation($"API GetMediaFile - Getting media file with id {uuid}");
 
+            var mediaItem = await _mediaDataService.GetMediaItem(uuid);
             var mediaStream = await _mediaDataService.GetMediaStream(uuid);
 
-            return File(mediaStream, "image/png");
+            return File(mediaStream, mediaItem.ContentType);
 
         }
     }
