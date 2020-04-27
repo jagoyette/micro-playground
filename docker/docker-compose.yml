@@ -3,6 +3,7 @@ version: '3.4'
 services:
   apigateway:
     image: apigateway
+    restart: always
     build:
       context: ../ApiGateway
       dockerfile: Dockerfile
@@ -12,45 +13,32 @@ services:
 
   appserver:
     image: appserver
+    restart: always
     build:
       context: ../client-web-app
       dockerfile: Dockerfile
       
   patientservice:
     image: patientservice
+    restart: always
     build:
       context: ../PatientService
       dockerfile: Dockerfile
-    ports:
-      - 9443:443
-      - 9080:80
 
   mediaservice:
     image: mediaservice
+    restart: always
     build:
       context: ../MediaService
       dockerfile: Dockerfile
     volumes:
       - ./media:/app/media
-    ports:
-      - 10443:443
-      - 10080:80
 
   mongo:
     image: mongo
     restart: always
     volumes:
       - mongo_data:/data   # Volume mapping is not working on Windows for Mongo
-    ports:
-      - 27017:27017
- 
-  mongo-express:
-    image: mongo-express
-    restart: always
-    depends_on: 
-      - mongo
-    ports:
-      - 8081:8081
 
 volumes:
   mongo_data:

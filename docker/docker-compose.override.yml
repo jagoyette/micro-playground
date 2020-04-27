@@ -1,0 +1,27 @@
+# overrides for development mode
+# expose each service on individual host ports
+version: '3.4'
+
+services:
+  patientservice:
+    ports:
+      - 9443:443
+      - 9080:80
+
+  mediaservice:
+    ports:
+      - 10443:443
+      - 10080:80
+
+  mongo:
+    ports:
+      - 27017:27017
+ 
+  # Add mongo-express to development stack
+  mongo-express:
+    image: mongo-express
+    restart: always
+    depends_on: 
+      - mongo
+    ports:
+      - 8081:8081
