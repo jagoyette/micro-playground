@@ -9,6 +9,12 @@ services:
     ports:
       - 80:80
       - 443:443
+
+  appserver:
+    image: appserver
+    build:
+      context: ../client-web-app
+      dockerfile: Dockerfile
       
   patientservice:
     image: patientservice
