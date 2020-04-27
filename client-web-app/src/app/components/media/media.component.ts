@@ -26,6 +26,10 @@ export class MediaComponent implements OnInit {
 
   }
 
+  getMediaUrl(mediaItem: Media): string {
+    return this.patientMediaService.getMediaFileUrl(mediaItem.uuid);
+  }
+
   private initializeWithPatientId(patientUuid: string): void {
     console.log('Initializing media for patient ' + patientUuid);
 

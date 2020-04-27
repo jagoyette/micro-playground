@@ -5,9 +5,9 @@
     <div class="container">
         <div class="flex-container" fxLayout="row wrap" fxLayoutGap="16px">
             <mat-card class="media-card" *ngFor="let mediaItem of media" fxFlex="20">
-                <img [src]="'http://localhost' + mediaItem.mediaUrl">
+                <img [src]="getMediaUrl(mediaItem)">
                 <mat-card-content>
-                    {{ mediaItem.filename }}
+                    {{ mediaItem.fileName }}
                 </mat-card-content>
             </mat-card>
         </div>
