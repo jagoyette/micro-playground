@@ -42,9 +42,6 @@ namespace ApiGateway
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
-
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
             
             app.UseOcelot().Wait();
         }

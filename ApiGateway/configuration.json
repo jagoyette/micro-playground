@@ -43,6 +43,17 @@
                     "Port": 80
                 }
             ]
+        },
+        {
+            "UpstreamPathTemplate": "/{anything-else}",
+            "DownstreamPathTemplate": "/{anything-else}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "appserver",
+                    "Port": 80
+                }
+            ]
         }
     ],
     "GlobalConfiguration": {}
