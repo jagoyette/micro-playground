@@ -9,9 +9,13 @@
       <mat-label>Content Type</mat-label>
       <input matInput [(ngModel)]="fileInfo.contentType" name="contentType">
     </mat-form-field>
-    <div class="browse-container">
-        <input hidden type="file" #fileInput (change)="updateFileInfo(fileInput.files)" >
-        <button cdkFocusInitial mat-raised-button type="button" (click)="fileInput.click()">Select File...</button>
+    <div class="container-browse">
+      <input hidden type="file" #fileInput (change)="updateFileInfo(fileInput.files)" >
+      <button cdkFocusInitial mat-raised-button type="button" (click)="fileInput.click()">Select File...</button>
+    </div>
+    <div class="container-progress" [hidden]="progress < 0">
+      <mat-progress-bar mode="determinate" color="primary" [value]="progress"></mat-progress-bar>
+      <div>Upload Progress: {{progress}}%</div>
     </div>
   </div>
   <div mat-dialog-actions>

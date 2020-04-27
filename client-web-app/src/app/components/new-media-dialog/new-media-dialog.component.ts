@@ -17,7 +17,7 @@ export class NewMediaDialogComponent implements OnInit {
 
   private patientUuid: string;
   public media: Media;
-  public progress: number;
+  public progress = -1;
 
   // Data for dialog
   public fileInfo = {
@@ -46,6 +46,7 @@ export class NewMediaDialogComponent implements OnInit {
   }
 
   onUpload(): void {
+    this.progress = 0;
     this.mediaService.createMediaItem(this.patientUuid,
       this.fileInfo.fileName, this.fileInfo.contentType, this.fileInfo.file)
       .subscribe(event => {
