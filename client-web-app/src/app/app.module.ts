@@ -24,6 +24,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PatientsComponent } from './components/patients/patients.component';
 import { MediaComponent } from './components/media/media.component';
 import { NewPatientDialogComponent } from './components/new-patient-dialog/new-patient-dialog.component';
+import { NewMediaDialogComponent } from './components/new-media-dialog/new-media-dialog.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NewPatientDialogComponent } from './components/new-patient-dialog/new-p
     HomeComponent,
     PatientsComponent,
     MediaComponent,
-    NewPatientDialogComponent
+    NewPatientDialogComponent,
+    NewMediaDialogComponent
   ],
   imports: [
     BrowserModule,

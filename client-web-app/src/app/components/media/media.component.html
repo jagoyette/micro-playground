@@ -1,6 +1,12 @@
 <div>
-    <div [hidden]="patient" class="mat-title">Retrieving patient info...</div>
-    <div [hidden]="!patient" class="mat-title">{{patient?.lastName}}, {{patient?.firstName}} : {{patient?.patientId}}</div>
+    <h2 class="title">Media for: {{patient?.firstName}} {{patient?.lastName}} ({{patient?.patientId}})
+        <span class="btn-add-media">
+            <button mat-mini-fab color="accent" aria-label="New Media"
+                (click)="createNewMedia();">
+                <mat-icon>add</mat-icon>
+            </button>
+        </span>
+    </h2>
 
     <div class="container">
         <div class="flex-container" fxLayout="row wrap" fxLayoutGap="16px">

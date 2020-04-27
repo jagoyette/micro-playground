@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Upload Media</h1>
+<form>
+  <div mat-dialog-content fxLayout="column" fxLayoutAlign="space-evenly start">
+    <mat-form-field>
+      <mat-label>File Name</mat-label>
+      <input matInput [(ngModel)]="fileInfo.fileName" name="fileName">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Content Type</mat-label>
+      <input matInput [(ngModel)]="fileInfo.contentType" name="contentType">
+    </mat-form-field>
+    <div class="browse-container">
+        <input hidden type="file" #fileInput (change)="updateFileInfo(fileInput.files)" >
+        <button cdkFocusInitial mat-raised-button type="button" (click)="fileInput.click()">Select File...</button>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-button (click)="onUpload()">Upload</button>
+  </div>
+</form>
+

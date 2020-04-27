@@ -4,6 +4,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Patient } from 'src/app/models/patient';
 import { Media } from 'src/app/models/media';
 import { PatientMediaService } from 'src/app/services/patient-media.service';
+import { MatDialog } from '@angular/material/dialog';
+import { NewMediaDialogComponent } from '../new-media-dialog/new-media-dialog.component';
 
 @Component({
   selector: 'app-media',
@@ -12,7 +14,9 @@ import { PatientMediaService } from 'src/app/services/patient-media.service';
 })
 export class MediaComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private patientMediaService: PatientMediaService) { }
+  constructor(private route: ActivatedRoute,
+              private patientMediaService: PatientMediaService,
+              private mediaDialog: MatDialog) { }
 
   public patient: Patient;
   public media: Media[];
@@ -24,6 +28,19 @@ export class MediaComponent implements OnInit {
       this.initializeWithPatientId(params.get('patientUuid'));
     });
 
+  }
+
+  createNewMedia(): void {
+    const dialogRef = this.mediaDialog.open(NewMediaDialogComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Successfully added new media');
+        const newMedia = result;
+        const newList = this.media;
+        newList.push(newMedia);
+        this.media = newList.slice();
+     }
+    });
   }
 
   getMediaUrl(mediaItem: Media): string {
