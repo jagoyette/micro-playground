@@ -49,10 +49,10 @@ export class PatientMediaService {
 
     // create form data to post
     const formData = new FormData();
-    formData.append('file', file, file.name);
-    formData.append('patientUuid', patientUuid);
-    formData.append('fileName', fileName);
-    formData.append('contentType', contentType);
+    formData.append('PatientUuid', patientUuid);
+    formData.append('FileName', fileName);
+    formData.append('ContentType', contentType);
+    formData.append('FileInfo', file, file.name);
 
     return this.http.post<Media>(url, formData);
   }
