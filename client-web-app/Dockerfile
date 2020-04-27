@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["package.json", "./"]
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run build -- --prod
 
 FROM base AS final
 COPY --from=build /src/dist/client-web-app /usr/share/nginx/html
