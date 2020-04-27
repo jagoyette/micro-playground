@@ -6,9 +6,9 @@ namespace MediaService.Models
     {
         public string PatientUuid {get; set;}
 
-        public string Filename { get; set; }
+        public string FileName { get; set; }
 
-        public string Filetype { get; set; }
+        public string ContentType { get; set; }
         
         public IFormFile FileInfo {get; set;}
     }

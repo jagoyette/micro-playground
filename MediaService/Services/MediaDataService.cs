@@ -46,7 +46,6 @@ namespace MediaService.Services
 
         public string MediaStoreRootPath => _mediaStoreRootPath;
 
-        
         public async Task<List<Media>> GetMediaForPatient(string patientUuid)
         {
             _logger.LogDebug($"Retrieving media for patient {patientUuid}");
@@ -66,7 +65,7 @@ namespace MediaService.Services
             var mediaUuid = MongoDB.Bson.ObjectId.GenerateNewId().ToString();
 
             // save the file to our media store
-            var mediaPath = Path.Combine(_mediaStoreRootPath, mediaUuid + "-" + mediaInfo.Filename);
+            var mediaPath = GetMediaPath(mediaUuid, mediaInfo.FileName);
             using (var stream = new FileStream(mediaPath, FileMode.Create))
             {
                 fileStream.CopyTo(stream);
@@ -78,9 +77,9 @@ namespace MediaService.Services
             {
                 Uuid =  mediaUuid,
                 PatientUuid = mediaInfo.PatientUuid,
-                Filename = mediaInfo.Filename,
-                Filetype = mediaInfo.Filetype,
-                MediaUrl = mediaPath
+                FileName = mediaInfo.FileName,
+                ContentType = mediaInfo.ContentType,
+                Path = mediaPath
             };
 
             await _mediaCollection.InsertOneAsync(media);
@@ -92,8 +91,7 @@ namespace MediaService.Services
             var mediaItem = await GetMediaItem(uuid);
             if (mediaItem != null)
             {
-                var mediaPath = Path.Combine(_mediaStoreRootPath, uuid + "-" + mediaItem.Filename);
-                return new FileStream(mediaPath, FileMode.Open);
+                return new FileStream(GetMediaPath(mediaItem.Uuid, mediaItem.FileName), FileMode.Open);
             }
 
             return null;
@@ -107,5 +105,8 @@ namespace MediaService.Services
 
         public async void Remove(string uuid) =>
             await _mediaCollection.DeleteOneAsync(media => media.Uuid == uuid);
+
+        private string GetMediaPath(string uuid, string filename) =>
+            Path.Combine(_mediaStoreRootPath, uuid + "-" + filename);
     }
 }

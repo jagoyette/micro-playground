@@ -56,8 +56,8 @@ namespace MediaService.Controllers
             var mediaInfo = new MediaInfo
             {
                 PatientUuid = patientUuid,
-                Filename = mediaFormData.Filename,
-                Filetype = mediaFormData.Filetype
+                FileName = mediaFormData.FileName,
+                ContentType = mediaFormData.ContentType
             };
 
             return await _mediaDataService.CreateMediaForPatient(mediaInfo, fileInfo.OpenReadStream());

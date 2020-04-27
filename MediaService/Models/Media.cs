@@ -12,11 +12,11 @@ namespace MediaService.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string PatientUuid { get; set; }
 
-        public string Filename { get; set; }
+        public string FileName { get; set; }
 
-        public string Filetype { get; set; }
+        public string ContentType { get; set; }
 
-        public string MediaUrl { get; set; }
+        public string Path { get; set; }
     }
     
 }
