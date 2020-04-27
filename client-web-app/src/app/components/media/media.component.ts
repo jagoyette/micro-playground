@@ -31,7 +31,10 @@ export class MediaComponent implements OnInit {
   }
 
   createNewMedia(): void {
-    const dialogRef = this.mediaDialog.open(NewMediaDialogComponent);
+    const dialogRef = this.mediaDialog.open(NewMediaDialogComponent,
+      { data: { patientUuid: this.patient.uuid}});
+
+    // Subscribe to close event
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('Successfully added new media');

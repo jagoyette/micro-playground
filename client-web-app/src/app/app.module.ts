@@ -16,7 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule, MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,7 +47,8 @@ import { NewMediaDialogComponent } from './components/new-media-dialog/new-media
     MatSliderModule, MatCardModule, MatButtonModule,
     MatMenuModule, MatSidenavModule, MatToolbarModule,
     MatDividerModule, MatTableModule, MatDialogModule,
-    MatFormFieldModule, MatInputModule, MatIconModule
+    MatFormFieldModule, MatInputModule, MatIconModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     NewPatientDialogComponent
