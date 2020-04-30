@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { PatientMediaService } from 'src/app/services/patient-media.service';
@@ -12,7 +13,8 @@ import { NewPatientDialogComponent } from '../new-patient-dialog/new-patient-dia
 })
 export class PatientsComponent implements OnInit {
 
-  constructor(private patientMediaService: PatientMediaService,
+  constructor(private router: Router,
+              private patientMediaService: PatientMediaService,
               private newPatientDialog: MatDialog) { }
 
   public patients: Patient[];
@@ -29,6 +31,10 @@ export class PatientsComponent implements OnInit {
 
   selectPatient(row: Patient): void {
     this.selectedPatient = row;
+  }
+
+  showPatientMedia(patientUuid: string): Promise<boolean> {
+    return this.router.navigate(['/media', patientUuid]);
   }
 
   createNewPatient(): void {

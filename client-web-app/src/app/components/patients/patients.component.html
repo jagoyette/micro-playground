@@ -31,6 +31,7 @@
         <mat-row class="selectable-row"
                 [ngClass]="{'selected': selectedPatient === row }"
                 (click)="selectPatient(row);"
+                (dblclick)="showPatientMedia(row.uuid);"
                 *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
 
