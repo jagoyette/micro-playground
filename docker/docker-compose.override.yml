@@ -3,6 +3,11 @@
 version: '3.4'
 
 services:
+  apigateway:
+    ports:
+      - 8443:443
+      - 8080:80
+
   patientservice:
     ports:
       - 9443:443
