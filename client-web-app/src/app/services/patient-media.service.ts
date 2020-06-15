@@ -16,7 +16,7 @@ export class PatientMediaService {
   private readonly baseUrl = environment.apiBaseUrl || '/api/v1';
 
   constructor(private http: HttpClient) {
-    console.log('PatientMediaService created with base url: ' + this.baseUrl)
+    console.log('PatientMediaService created with base url: ' + this.baseUrl);
   }
 
   getAllPatents(): Observable<Patient[]> {
