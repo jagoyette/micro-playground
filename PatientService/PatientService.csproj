@@ -4,6 +4,6 @@
     <UserSecretsId>4ccd493176fefbbfd2d79508123dfe23</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.10.3"/>
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0"/>
   </ItemGroup>
 </Project>
